@@ -1,0 +1,32 @@
+[
+  {
+    "email": "admin@gmail.com",
+    "matkhau": "Admin@123",
+    "hoten": "Trần Thị Ngọc Hà",
+    "hinhanh": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=500&auto=format&fit=crop&q=80"
+  },
+  {
+    "email": "nguyenvanan@gmail.com",
+    "matkhau": "An123456",
+    "hoten": "Nguyễn Văn An",
+    "hinhanh": "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=500&auto=format&fit=crop&q=80"
+  },
+  {
+    "email": "lethibaotran@gmail.com",
+    "matkhau": "TranLe2026",
+    "hoten": "Lê Thị Bảo Trân",
+    "hinhanh": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=500&auto=format&fit=crop&q=80"
+  },
+  {
+    "email": "phamquanghuy@gmail.com",
+    "matkhau": "HuyPham88",
+    "hoten": "Phạm Quang Huy",
+    "hinhanh": "https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?w=500&auto=format&fit=crop&q=80"
+  },
+  {
+    "email": "hoangthimaiphuong@gmail.com",
+    "matkhau": "PhuongMai99",
+    "hoten": "Hoàng Thị Mai Phương",
+    "hinhanh": "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=500&auto=format&fit=crop&q=80"
+  }
+]

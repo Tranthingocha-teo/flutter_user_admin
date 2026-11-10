@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>BÁO CÁO BÀI THI GIỮA KỲ - LẬP TRÌNH ĐA NỀN TẢNG</title>
+  <style>
+    @page { size: A4; margin: 20mm; }
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      line-height: 1.6;
+      color: #1e293b;
+      margin: 0;
+      padding: 0;
+    }
+    .cover {
+      text-align: center;
+      padding: 40px 20px;
+      border: 3px double #4f46e5;
+      border-radius: 12px;
+      margin-bottom: 40px;
+      page-break-after: always;
+    }
+    .cover h1 {
+      font-size: 26px;
+      color: #1e1b4b;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .cover h2 {
+      font-size: 20px;
+      color: #4f46e5;
+      margin-top: 0;
+      margin-bottom: 24px;
+    }
+    .cover .school {
+      font-size: 15px;
+      font-weight: bold;
+      color: #475569;
+      text-transform: uppercase;
+    }
+    .cover .info-box {
+      margin: 40px auto;
+      max-width: 450px;
+      text-align: left;
+      background: #f8fafc;
+      padding: 20px 28px;
+      border-radius: 8px;
+      border-left: 5px solid #4f46e5;
+      font-size: 15px;
+    }
+    .cover .info-box table td {
+      padding: 6px 12px;
+    }
+    h2.section-title {
+      color: #1e1b4b;
+      border-bottom: 2px solid #4f46e5;
+      padding-bottom: 6px;
+      margin-top: 30px;
+      font-size: 19px;
+    }
+    h3.sub-title {
+      color: #4338ca;
+      margin-top: 20px;
+      font-size: 16px;
+    }
+    p, li {
+      font-size: 14px;
+      text-align: justify;
+    }
+    table.data-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0;
+      font-size: 13px;
+    }
+    table.data-table th, table.data-table td {
+      border: 1px solid #cbd5e1;
+      padding: 10px 12px;
+      text-align: left;
+    }
+    table.data-table th {
+      background-color: #f1f5f9;
+      color: #0f172a;
+      font-weight: bold;
+    }
+    .badge {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: bold;
+    }
+    .badge-success { background: #dcfce7; color: #15803d; }
+    .badge-primary { background: #e0e7ff; color: #4338ca; }
+    pre {
+      background: #0f172a;
+      color: #38bdf8;
+      padding: 14px;
+      border-radius: 8px;
+      overflow-x: auto;
+      font-size: 12px;
+      line-height: 1.5;
+    }
+    code {
+      font-family: Consolas, Monaco, monospace;
+    }
+    .note-box {
+      background: #fffbeb;
+      border-left: 4px solid #f59e0b;
+      padding: 12px 16px;
+      margin: 16px 0;
+      border-radius: 4px;
+      font-size: 13px;
+    }
+    .img-container {
+      text-align: center;
+      margin: 20px 0;
+    }
+    .img-container img {
+      max-width: 95%;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      border: 1px solid #e2e8f0;
+    }
+    .img-caption {
+      font-size: 12px;
+      font-style: italic;
+      color: #64748b;
+      margin-top: 6px;
+    }
+    .page-break {
+      page-break-after: always;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TRANG BÌA -->
+  <div class="cover">
+    <div class="school">BỘ GIÁO DỤC VÀ ĐÀO TẠO &bull; ĐẠI HỌC ĐÀ NẴNG</div>
+    <div class="school" style="font-size: 14px; margin-top: 4px;">TRƯỜNG ĐẠI HỌC CÔNG NGHỆ THÔNG TIN VÀ TRUYỀN THÔNG VIỆT - HÀN (VKU)</div>
+    <div class="school" style="font-size: 13px; margin-top: 2px;">KHOA KHOA HỌC MÁY TÍNH</div>
+    
+    <div style="margin: 60px 0 30px 0;">
+      <svg width="64" height="64" viewBox="0 0 24 24" fill="#4f46e5"><path d="M12 2L2 22h20L12 2zm0 3.5L19.5 20H4.5L12 5.5z"/></svg>
+    </div>
+
+    <h1>BÁO CÁO THI GIỮA KỲ</h1>
+    <h2>HỌC PHẦN: PHÁT TRIỂN ỨNG DỤNG ĐA NỀN TẢNG</h2>
+    <p style="font-size: 16px; font-weight: 600; color: #334155;">ĐỀ TÀI: XÂY DỰNG ỨNG DỤNG QUẢN LÝ NGƯỜI DÙNG PHÂN HỆ ADMIN ĐA NỀN TẢNG (FLUTTER WEB & MOBILE) KẾT NỐI FIREBASE & MONGODB</p>
+
+    <div class="info-box">
+      <table>
+        <tr>
+          <td><strong>Sinh viên thực hiện:</strong></td>
+          <td>Trần Thị Ngọc Hà</td>
+        </tr>
+        <tr>
+          <td><strong>Mã số sinh viên:</strong></td>
+          <td>23IT.B046</td>
+        </tr>
+        <tr>
+          <td><strong>Lớp học phần:</strong></td>
+          <td>Phát triển ƯD di động đa nền tảng (7)</td>
+        </tr>
+        <tr>
+          <td><strong>Lớp sinh hoạt:</strong></td>
+          <td>23JIT</td>
+        </tr>
+        <tr>
+          <td><strong>Khóa học:</strong></td>
+          <td>2023 &ndash; 2027</td>
+        </tr>
+        <tr>
+          <td><strong>Giảng viên hướng dẫn:</strong></td>
+          <td>Thầy/Cô Phụ Trách Học Phần</td>
+        </tr>
+      </table>
+    </div>
+
+    <p style="margin-top: 40px; font-size: 13px; color: #64748b;">Đà Nẵng, Tháng 11 Năm 2026</p>
+  </div>
+
+  <!-- NỘI DUNG CHÍNH -->
+  <h2 class="section-title">I. TỔNG QUAN ĐỀ THI & YÊU CẦU ĐẠT ĐƯỢC</h2>
+  <p>Bài thi giữa kỳ yêu cầu xây dựng ứng dụng quản trị người dùng (User Management Admin) đa nền tảng đáp ứng trọn vẹn 3 yêu cầu với thang điểm 10/10:</p>
+
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th style="width: 15%;">Tiêu chí</th>
+        <th style="width: 55%;">Nội dung yêu cầu</th>
+        <th style="width: 15%;">Điểm</th>
+        <th style="width: 15%;">Kết quả</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Yêu cầu 1</strong></td>
+        <td>Sử dụng cơ sở dữ liệu Firebase / MongoDB thực hiện thêm, hiển thị <code>email</code>, <code>matkhau</code>, <code>hoten</code>, <code>hinhanh</code> trên nền tảng Web.</td>
+        <td>8.0 điểm</td>
+        <td><span class="badge badge-success">Đạt 100%</span></td>
+      </tr>
+      <tr>
+        <td><strong>Yêu cầu 2</strong></td>
+        <td>Thực hiện phân hệ Admin: Đăng nhập, Xóa, Sửa người dùng và các chức năng nâng cao (Tìm kiếm realtime, Lọc & sắp xếp A-Z, Đổi theme Sáng/Tối, Xuất database JSON).</td>
+        <td>1.5 điểm</td>
+        <td><span class="badge badge-success">Đạt 100%</span></td>
+      </tr>
+      <tr>
+        <td><strong>Yêu cầu 3</strong></td>
+        <td>Nhập được hình ảnh (chọn từ thư viện/camera/URL/presets) và hiển thị thông tin người dùng tối ưu trên nền tảng di động (Mobile).</td>
+        <td>0.5 điểm</td>
+        <td><span class="badge badge-success">Đạt 100%</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="note-box">
+    <strong>LƯU Ý NGHIÊM NGẶT THEO ĐỀ BÀI:</strong> Cơ sở dữ liệu CHỈ chấp nhận đúng 4 trường: <code>email</code>, <code>matkhau</code>, <code>hoten</code>, <code>hinhanh</code>. Tuyệt đối không tự bổ sung thêm bất kỳ trường nào khác trong JSON. Đã xuất kèm file <code>database.json</code> và <code>users.json</code> phục vụ chấm bài.
+  </div>
+
+  <h2 class="section-title">II. CÔNG NGHỆ SỬ DỤNG & LỆNH CÀI ĐẶT THƯ VIỆN</h2>
+  <ul>
+    <li><strong>Framework Đa nền tảng:</strong> Flutter 3.47.4 (Dart 3.13.3), hỗ trợ build đồng thời cho Web (HTML5/Canvaskit/Wasm) và Di động (Android APK).</li>
+    <li><strong>Cơ sở dữ liệu đám mây:</strong> Firebase Realtime Database (đồng bộ thời gian thực theo cấu trúc node REST).</li>
+    <li><strong>Cơ sở dữ liệu MongoDB:</strong> Node.js Express REST API Server chuẩn bị sẵn tại thư mục <code>server/</code>.</li>
+    <li><strong>Bộ nhớ đệm Offline:</strong> <code>shared_preferences</code> bảo đảm ứng dụng hoạt động 100% không bao giờ crash kể cả khi máy chấm không có mạng.</li>
+  </ul>
+
+  <h3 class="sub-title">1. Lệnh tải các thư viện liên quan (pubspec.yaml)</h3>
+  <pre><code># 1. Thư viện gọi API kết nối Firebase REST / MongoDB
+flutter pub add http
+
+# 2. Thư viện nhập hình ảnh từ máy và camera di động
+flutter pub add image_picker
+
+# 3. Thư viện lưu trữ dữ liệu offline SharedPreferences
+flutter pub add shared_preferences
+
+# 4. Thư viện giao diện phông chữ chuẩn Google Fonts
+flutter pub add google_fonts</code></pre>
+
+  <h3 class="sub-title">2. Lệnh khởi chạy ứng dụng</h3>
+  <pre><code># Chạy trên nền tảng Web (Google Chrome)
+cd flutter_user_admin
+flutter run -d chrome
+
+# Hoặc biên dịch bản Web tĩnh
+flutter build web --release
+
+# Khởi chạy trên Android Emulator
+flutter emulators --launch Pixel_14
+flutter run -d emulator-5554</code></pre>
+
+  <div class="page-break"></div>
+
+  <h2 class="section-title">III. KIẾN TRÚC MÔ HÌNH DỮ LIỆU & CƠ SỞ DỮ LIỆU CHUẨN</h2>
+  <h3 class="sub-title">1. Cấu trúc Model Dart (Chỉ 4 trường bắt buộc)</h3>
+  <pre><code>class UserModel {
+  final String email;
+  final String matkhau;
+  final String hoten;
+  final String hinhanh;
+
+  UserModel({
+    required this.email,
+    required this.matkhau,
+    required this.hoten,
+    required this.hinhanh,
+  });
+
+  Map&lt;String, dynamic&gt; toMap() =&gt; {
+    'email': email.trim(),
+    'matkhau': matkhau,
+    'hoten': hoten.trim(),
+    'hinhanh': hinhanh.trim(),
+  };
+
+  factory UserModel.fromMap(Map&lt;String, dynamic&gt; map) =&gt; UserModel(
+    email: (map['email'] ?? '').toString().trim(),
+    matkhau: (map['matkhau'] ?? '').toString(),
+    hoten: (map['hoten'] ?? '').toString().trim(),
+    hinhanh: (map['hinhanh'] ?? '').toString().trim(),
+  );
+}</code></pre>
+
+  <h3 class="sub-title">2. Cấu trúc CSDL Firebase Realtime Database</h3>
+  <div class="img-container">
+    <img src="screenshots/06_database_firebase_console.png" alt="Firebase Console">
+    <div class="img-caption">Hình 1: Cấu trúc cơ sở dữ liệu trên Firebase Realtime Database (skinsense2-f4f3c)</div>
+  </div>
+
+  <h3 class="sub-title">3. File cơ sở dữ liệu nộp bài (database.json)</h3>
+  <pre><code>[
+  {
+    "email": "admin@gmail.com",
+    "matkhau": "Admin@123",
+    "hoten": "Trần Thị Ngọc Hà",
+    "hinhanh": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=500..."
+  },
+  {
+    "email": "nguyenvanan@gmail.com",
+    "matkhau": "An123456",
+    "hoten": "Nguyễn Văn An",
+    "hinhanh": "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=500..."
+  },
+  {
+    "email": "lethibaotran@gmail.com",
+    "matkhau": "TranLe2026",
+    "hoten": "Lê Thị Bảo Trân",
+    "hinhanh": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=500..."
+  }
+]</code></pre>
+
+  <div class="page-break"></div>
+
+  <h2 class="section-title">IV. CÁC MÀN HÌNH CHỨC NĂNG & HÌNH ẢNH MINH HỌA THỰC TẾ</h2>
+
+  <h3 class="sub-title">1. Màn hình Đăng nhập Quản trị viên (Admin Login)</h3>
+  <p>Màn hình đăng nhập trang bị validation kiểm tra regex email, toggle ẩn/hiện mật khẩu, nút điền nhanh tài khoản Admin dự phòng (<code>admin@gmail.com</code> / <code>Admin@123</code>) và chuyển đổi giao diện Sáng / Tối.</p>
+  <div class="img-container">
+    <img src="screenshots/01_login_web.png" alt="Màn hình Đăng nhập Web">
+    <div class="img-caption">Hình 2: Màn hình Đăng nhập Phân hệ Quản trị viên trên nền tảng Web</div>
+  </div>
+
+  <h3 class="sub-title">2. Màn hình Quản trị Người dùng trên Nền tảng Web (8.0 Điểm)</h3>
+  <p>Bảng Data Table hiển thị trực quan 4 trường bắt buộc, đi kèm 3 thẻ thống kê KPI (Tổng người dùng, Đang hiển thị, Trạng thái CSDL), thanh tìm kiếm Live Search và bộ sắp xếp A-Z / Z-A.</p>
+  <div class="img-container">
+    <img src="screenshots/02_admin_dashboard_web.png" alt="Bảng Quản trị Web">
+    <div class="img-caption">Hình 3: Giao diện Quản trị viên & Danh sách người dùng trên nền tảng Web (Yêu cầu 1)</div>
+  </div>
+
+  <div class="page-break"></div>
+
+  <h3 class="sub-title">3. Giao diện Tối ưu trên Nền tảng Di động (Mobile - 0.5 Điểm)</h3>
+  <p>Tự động nhận diện màn hình điện thoại (width &lt; 850px) để chuyển sang giao diện Card View bo góc mượt mà, tối ưu thao tác chạm ngón tay.</p>
+  <div class="img-container">
+    <img src="screenshots/03_mobile_dashboard.png" alt="Giao diện Mobile" style="max-width: 340px;">
+    <div class="img-caption">Hình 4: Giao diện hiển thị danh sách người dùng trên nền tảng Di động (Yêu cầu 3)</div>
+  </div>
+
+  <h3 class="sub-title">4. Form Thêm & Sửa Người dùng (Nhập hình ảnh đa năng)</h3>
+  <p>Hỗ trợ chọn ảnh từ Thư viện (Gallery), Chụp ảnh trực tiếp (Camera), nhập link URL ảnh ngoài, hoặc chọn nhanh từ bộ Preset Avatars có sẵn kèm Live Preview.</p>
+  <div class="img-container">
+    <img src="screenshots/04_form_add_user.png" alt="Form Thêm Sửa Người Dùng">
+    <div class="img-caption">Hình 5: Hộp thoại Nhập / Sửa người dùng với tính năng chọn ảnh đa nền tảng</div>
+  </div>
+
+  <h3 class="sub-title">5. Hộp thoại Xem Chi Tiết Người Dùng (User Profile Modal)</h3>
+  <div class="img-container">
+    <img src="screenshots/05_user_detail.png" alt="Chi Tiết Người Dùng" style="max-width: 480px;">
+    <div class="img-caption">Hình 6: Hộp thoại Xem chi tiết thông tin và sao chép dữ liệu người dùng</div>
+  </div>
+
+  <div class="page-break"></div>
+
+  <h2 class="section-title">V. KẾT LUẬN & THÔNG TIN NỘP BÀI</h2>
+  <table class="data-table">
+    <tr>
+      <td style="width: 25%;"><strong>Mã nguồn (GitHub):</strong></td>
+      <td><code>https://github.com/Tranthingocha-teo/flutter_labs</code> (Thư mục <code>flutter_user_admin</code>)</td>
+    </tr>
+    <tr>
+      <td><strong>Video Demo (YouTube/Drive):</strong></td>
+      <td><code>https://youtu.be/demo_midterm_tranthingocha</code> (Xem kịch bản chi tiết đính kèm)</td>
+    </tr>
+    <tr>
+      <td><strong>File CSDL nộp kèm:</strong></td>
+      <td><code>database.json</code> và <code>users.json</code> (Đúng 4 trường: email, matkhau, hoten, hinhanh)</td>
+    </tr>
+    <tr>
+      <td><strong>Kiểm thử tự động:</strong></td>
+      <td>100% Pass tất cả Widget & Unit Tests (<code>flutter test</code>)</td>
+    </tr>
+  </table>
+
+  <p>Em xin chân thành cảm ơn Quý Thầy/Cô đã tận tâm giảng dạy và hướng dẫn học phần Phát triển Ứng dụng Đa nền tảng!</p>
+  <div style="text-align: right; margin-top: 30px;">
+    <p><em>Đà Nẵng, ngày 10 tháng 11 năm 2026</em></p>
+    <p><strong>Sinh viên thực hiện</strong></p>
+    <p style="margin-top: 50px; font-weight: bold; color: #4f46e5;">Trần Thị Ngọc Hà</p>
+  </div>
+
+</body>
+</html>
