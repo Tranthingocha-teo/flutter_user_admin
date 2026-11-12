@@ -72,17 +72,7 @@ flutter emulators --launch Pixel_14
 flutter run -d emulator-5554
 ```
 
-### 3. Đồng bộ dữ liệu thật vào `database.json`
-App chạy trên Chrome/Android nên không ghi thẳng được vào file trong thư mục dự án.
-Chạy script sau song song với app; mỗi lần Thêm / Sửa / Xóa thì `database.json` tự cập nhật (chỉ 4 trường, không kèm ID):
-```bash
-# lần đầu: đăng nhập bằng tài khoản đã xác thực email
-FB_EMAIL=ban@gmail.com FB_PASSWORD=matkhau node tools/sync_database.mjs --watch
-# các lần sau (đã lưu phiên ở tools/.sync_token)
-node tools/sync_database.mjs --watch
-```
-
-### 4. Kiểm thử
+### 3. Kiểm thử
 ```bash
 flutter test
 ```
