@@ -1,0 +1,51 @@
+[
+  {
+    "Document ID": "EF97SpJ0EB3icUVwRx8k",
+    "image": "https://res.cloudinary.com/dkogrqsdw/image/upload/v1794456785/flutter_user_admin/s9tjri1hwnq4ckkgkqty.jpg",
+    "name": "Táo đỏ Tân Cương",
+    "price": 690000,
+    "soluong": 2
+  },
+  {
+    "Document ID": "NdgEwDV7UWkp2Mmgcsye",
+    "image": "https://res.cloudinary.com/dkogrqsdw/image/upload/v1794456578/flutter_user_admin/xysvotbfbca8dxnk9ltr.jpg",
+    "name": "Táo xanh nhỏ",
+    "price": 10000,
+    "soluong": 6
+  },
+  {
+    "Document ID": "NtmStesWtPVT218P4gnm",
+    "image": "https://res.cloudinary.com/dkogrqsdw/image/upload/v1794456460/flutter_user_admin/fprjyukux67l74owusgj.jpg",
+    "name": "Mận",
+    "price": 50000,
+    "soluong": 10
+  },
+  {
+    "Document ID": "Pjg13bT7H5w4q1AY9beF",
+    "image": "https://res.cloudinary.com/dkogrqsdw/image/upload/v1794456876/flutter_user_admin/uz70u4a7zj23xxgaxvlz.jpg",
+    "name": "Xoài tứ quý",
+    "price": 16000,
+    "soluong": 4
+  },
+  {
+    "Document ID": "Yz5xT6IXirLxr1dYNwAZ",
+    "image": "https://res.cloudinary.com/dkogrqsdw/image/upload/v1794456488/flutter_user_admin/p1eq2j7jmemcilcyjyl4.jpg",
+    "name": "Mận hạt",
+    "price": 25000,
+    "soluong": 5
+  },
+  {
+    "Document ID": "smuYBeUQPDcwBNErSmsA",
+    "image": "https://res.cloudinary.com/dkogrqsdw/image/upload/v1794456518/flutter_user_admin/vh1mp9zar85idvjsq4ut.jpg",
+    "name": "Táo đỏ",
+    "price": 100000,
+    "soluong": 3
+  },
+  {
+    "Document ID": "xsfyQIkYrhxIXnMjmjft",
+    "image": "https://res.cloudinary.com/dkogrqsdw/image/upload/v1794456544/flutter_user_admin/fwyguqbothrgwiezwk5q.jpg",
+    "name": "Táo xanh Mĩ",
+    "price": 80000,
+    "soluong": 15
+  }
+]

@@ -1,55 +1,60 @@
-import '../models/user_model.dart';
+import '../models/product_model.dart';
 
-/// Dữ liệu mẫu ban đầu tuân thủ nghiêm ngặt 4 trường:
-/// email, matkhau, hoten, hinhanh
-class InitialUsersData {
-  static List<UserModel> get defaultUsers => [
-        UserModel(
-          email: 'admin@gmail.com',
-          matkhau: 'Admin@123',
-          hoten: 'Trần Thị Ngọc Hà',
-          hinhanh:
-              'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=500&auto=format&fit=crop&q=80',
-        ),
-        UserModel(
-          email: 'nguyenvanan@gmail.com',
-          matkhau: 'An123456',
-          hoten: 'Nguyễn Văn An',
-          hinhanh:
-              'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=500&auto=format&fit=crop&q=80',
-        ),
-        UserModel(
-          email: 'lethibaotran@gmail.com',
-          matkhau: 'TranLe2026',
-          hoten: 'Lê Thị Bảo Trân',
-          hinhanh:
-              'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=500&auto=format&fit=crop&q=80',
-        ),
-        UserModel(
-          email: 'phamquanghuy@gmail.com',
-          matkhau: 'HuyPham88',
-          hoten: 'Phạm Quang Huy',
-          hinhanh:
-              'https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?w=500&auto=format&fit=crop&q=80',
-        ),
-        UserModel(
-          email: 'hoangthimaiphuong@gmail.com',
-          matkhau: 'PhuongMai99',
-          hoten: 'Hoàng Thị Mai Phương',
-          hinhanh:
-              'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=500&auto=format&fit=crop&q=80',
-        ),
-      ];
+String _img(String id) =>
+    'https://images.unsplash.com/photo-$id?w=500&auto=format&fit=crop&q=80';
 
-  /// Bộ avatar mẫu có sẵn để người dùng chọn nhanh khi thêm/sửa
-  static const List<String> presetAvatars = [
-    'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=500&auto=format&fit=crop&q=80',
-    'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=500&auto=format&fit=crop&q=80',
-    'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=500&auto=format&fit=crop&q=80',
-    'https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?w=500&auto=format&fit=crop&q=80',
-    'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=500&auto=format&fit=crop&q=80',
-    'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500&auto=format&fit=crop&q=80',
-    'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=500&auto=format&fit=crop&q=80',
-    'https://images.unsplash.com/photo-1628157582853-a796fa650a6a?w=500&auto=format&fit=crop&q=80',
+/// Dữ liệu mẫu ban đầu — chỉ gồm 4 trường: name, price, soluong, image
+class InitialProductsData {
+  static List<ProductModel> get defaultProducts => [
+    ProductModel(
+      name: 'Tai nghe Bluetooth Sony WH-1000XM5',
+      price: 7490000,
+      soluong: 15,
+      image: _img('1505740420928-5e560c06d30e'),
+    ),
+    ProductModel(
+      name: 'Đồng hồ nam dây da cổ điển',
+      price: 2350000,
+      soluong: 8,
+      image: _img('1523275335684-37898b6baf30'),
+    ),
+    ProductModel(
+      name: 'Giày thể thao Nike Air Đỏ',
+      price: 3290000,
+      soluong: 20,
+      image: _img('1542291026-7eec264c27ff'),
+    ),
+    ProductModel(
+      name: 'Máy ảnh chụp lấy liền Polaroid',
+      price: 2890000,
+      soluong: 4,
+      image: _img('1526170375885-4d8ecf77b99f'),
+    ),
+    ProductModel(
+      name: 'Kính mát thời trang UV400',
+      price: 650000,
+      soluong: 32,
+      image: _img('1572635196237-14b3f281503f'),
+    ),
+    ProductModel(
+      name: 'Laptop văn phòng 14 inch',
+      price: 15990000,
+      soluong: 6,
+      image: _img('1496181133206-80ce9b88a853'),
+    ),
+  ];
+
+  /// Ảnh sản phẩm mẫu để chọn nhanh khi thêm/sửa
+  static final List<String> presetImages = [
+    _img('1505740420928-5e560c06d30e'),
+    _img('1523275335684-37898b6baf30'),
+    _img('1542291026-7eec264c27ff'),
+    _img('1526170375885-4d8ecf77b99f'),
+    _img('1572635196237-14b3f281503f'),
+    _img('1585386959984-a4155224a1ad'),
+    _img('1546868871-7041f2a55e12'),
+    _img('1496181133206-80ce9b88a853'),
+    _img('1511707171634-5f897ff02aa9'),
+    _img('1491553895911-0055eca6402d'),
   ];
 }

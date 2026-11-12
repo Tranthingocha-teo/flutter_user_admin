@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "448658765310",
+    "project_id": "vku-product-admin-23itb",
+    "storage_bucket": "vku-product-admin-23itb.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:448658765310:android:e4015ffd9e5efe63d77caf",
+        "android_client_info": {
+          "package_name": "com.example.flutter_user_admin"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAhQh5syQt-2qggDDbcLCH1c0rHCXXNcS8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

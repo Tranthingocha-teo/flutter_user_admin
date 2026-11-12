@@ -1,32 +1,44 @@
 [
   {
-    "email": "admin@gmail.com",
-    "matkhau": "Admin@123",
-    "hoten": "Trần Thị Ngọc Hà",
-    "hinhanh": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=500&auto=format&fit=crop&q=80"
+    "name": "Táo đỏ Tân Cương",
+    "price": 690000,
+    "soluong": 2,
+    "image": "https://res.cloudinary.com/dkogrqsdw/image/upload/v1794456785/flutter_user_admin/s9tjri1hwnq4ckkgkqty.jpg"
   },
   {
-    "email": "nguyenvanan@gmail.com",
-    "matkhau": "An123456",
-    "hoten": "Nguyễn Văn An",
-    "hinhanh": "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=500&auto=format&fit=crop&q=80"
+    "name": "Táo xanh nhỏ",
+    "price": 10000,
+    "soluong": 6,
+    "image": "https://res.cloudinary.com/dkogrqsdw/image/upload/v1794456578/flutter_user_admin/xysvotbfbca8dxnk9ltr.jpg"
   },
   {
-    "email": "lethibaotran@gmail.com",
-    "matkhau": "TranLe2026",
-    "hoten": "Lê Thị Bảo Trân",
-    "hinhanh": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=500&auto=format&fit=crop&q=80"
+    "name": "Mận",
+    "price": 50000,
+    "soluong": 10,
+    "image": "https://res.cloudinary.com/dkogrqsdw/image/upload/v1794456460/flutter_user_admin/fprjyukux67l74owusgj.jpg"
   },
   {
-    "email": "phamquanghuy@gmail.com",
-    "matkhau": "HuyPham88",
-    "hoten": "Phạm Quang Huy",
-    "hinhanh": "https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?w=500&auto=format&fit=crop&q=80"
+    "name": "Xoài tứ quý",
+    "price": 16000,
+    "soluong": 4,
+    "image": "https://res.cloudinary.com/dkogrqsdw/image/upload/v1794456876/flutter_user_admin/uz70u4a7zj23xxgaxvlz.jpg"
   },
   {
-    "email": "hoangthimaiphuong@gmail.com",
-    "matkhau": "PhuongMai99",
-    "hoten": "Hoàng Thị Mai Phương",
-    "hinhanh": "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=500&auto=format&fit=crop&q=80"
+    "name": "Mận hạt",
+    "price": 25000,
+    "soluong": 5,
+    "image": "https://res.cloudinary.com/dkogrqsdw/image/upload/v1794456488/flutter_user_admin/p1eq2j7jmemcilcyjyl4.jpg"
+  },
+  {
+    "name": "Táo đỏ",
+    "price": 100000,
+    "soluong": 3,
+    "image": "https://res.cloudinary.com/dkogrqsdw/image/upload/v1794456518/flutter_user_admin/vh1mp9zar85idvjsq4ut.jpg"
+  },
+  {
+    "name": "Táo xanh Mĩ",
+    "price": 80000,
+    "soluong": 15,
+    "image": "https://res.cloudinary.com/dkogrqsdw/image/upload/v1794456544/flutter_user_admin/fwyguqbothrgwiezwk5q.jpg"
   }
 ]

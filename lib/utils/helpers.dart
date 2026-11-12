@@ -1,9 +1,9 @@
 import 'dart:convert';
 import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 
 class AppHelpers {
-  /// Kiểm tra định dạng Email hợp lệ bằng biểu thức chính quy (Regex)
   static bool isValidEmail(String email) {
     final emailRegex = RegExp(
       r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$',
@@ -11,104 +11,149 @@ class AppHelpers {
     return emailRegex.hasMatch(email.trim());
   }
 
-  /// Kiểm tra chuỗi có phải là Base64 Data URI không
+  /// 7490000 -> "7.490.000 ₫"
+  static String formatPrice(int price) => '${formatNumber(price)} ₫';
+
+  /// 7490000 -> "7.490.000"
+  static String formatNumber(int n) {
+    final s = n.abs().toString();
+    final buf = StringBuffer();
+    for (var i = 0; i < s.length; i++) {
+      if (i > 0 && (s.length - i) % 3 == 0) buf.write('.');
+      buf.write(s[i]);
+    }
+    return n < 0 ? '-$buf' : buf.toString();
+  }
+
   static bool isBase64Image(String source) {
     return source.startsWith('data:image/') && source.contains('base64,');
   }
 
-  /// Chuyển Base64 Data URI thành Uint8List để hiển thị ảnh
   static Uint8List? getBytesFromBase64(String source) {
     try {
-      final base64Str = source.split('base64,').last;
-      return base64Decode(base64Str);
+      return base64Decode(source.split('base64,').last);
     } catch (_) {
       return null;
     }
   }
 
-  /// Lấy 1 hoặc 2 chữ cái đầu của họ tên làm avatar đại diện khi ảnh lỗi
-  static String getInitials(String name) {
-    if (name.trim().isEmpty) return '?';
-    final parts = name.trim().split(' ');
-    if (parts.length == 1) {
-      return parts[0][0].toUpperCase();
-    }
-    return '${parts[0][0]}${parts[parts.length - 1][0]}'.toUpperCase();
-  }
-
-  /// Widget hiển thị Avatar người dùng thông minh:
-  /// - Hỗ trợ URL mạng (NetworkImage)
-  /// - Hỗ trợ Base64 Data URI (MemoryImage)
-  /// - Tự động fallback sang chữ cái đầu nếu không có ảnh hoặc ảnh hỏng
-  static Widget buildAvatar({
+  /// Ảnh sản phẩm bo góc: hỗ trợ URL mạng, Base64, và ô thay thế khi ảnh lỗi
+  static Widget buildProductImage({
     required String imageUrl,
-    required String name,
-    double radius = 24,
-    Color? backgroundColor,
-    Color? textColor,
+    double size = 48,
+    double radius = 10,
   }) {
     final cleanUrl = imageUrl.trim();
 
-    Widget fallbackWidget = CircleAvatar(
-      radius: radius,
-      backgroundColor: backgroundColor ?? const Color(0xFF6366F1).withOpacity(0.15),
-      child: Text(
-        getInitials(name),
-        style: TextStyle(
-          color: textColor ?? const Color(0xFF4F46E5),
-          fontWeight: FontWeight.bold,
-          fontSize: radius * 0.75,
-        ),
+    final placeholder = Container(
+      width: size,
+      height: size,
+      decoration: BoxDecoration(
+        color: const Color(0xFF6366F1).withValues(alpha: 0.12),
+        borderRadius: BorderRadius.circular(radius),
+      ),
+      child: Icon(
+        Icons.inventory_2_outlined,
+        size: size * 0.45,
+        color: const Color(0xFF4F46E5),
       ),
     );
 
-    if (cleanUrl.isEmpty) {
-      return fallbackWidget;
+    Widget image;
+    if (isBase64Image(cleanUrl) && getBytesFromBase64(cleanUrl) != null) {
+      image = Image.memory(
+        getBytesFromBase64(cleanUrl)!,
+        width: size,
+        height: size,
+        fit: BoxFit.cover,
+        errorBuilder: (_, _, _) => placeholder,
+      );
+    } else if (cleanUrl.startsWith('http://') ||
+        cleanUrl.startsWith('https://')) {
+      image = Image.network(
+        cleanUrl,
+        width: size,
+        height: size,
+        fit: BoxFit.cover,
+        errorBuilder: (_, _, _) => placeholder,
+        loadingBuilder: (context, child, progress) {
+          if (progress == null) return child;
+          return SizedBox(
+            width: size,
+            height: size,
+            child: const Center(
+              child: SizedBox(
+                width: 18,
+                height: 18,
+                child: CircularProgressIndicator(strokeWidth: 2),
+              ),
+            ),
+          );
+        },
+      );
+    } else {
+      return placeholder;
     }
 
-    if (isBase64Image(cleanUrl)) {
-      final bytes = getBytesFromBase64(cleanUrl);
-      if (bytes != null) {
-        return CircleAvatar(
-          radius: radius,
-          backgroundImage: MemoryImage(bytes),
-          onBackgroundImageError: (exception, stackTrace) => fallbackWidget,
-        );
-      }
-    }
+    return ClipRRect(borderRadius: BorderRadius.circular(radius), child: image);
+  }
+}
 
-    if (cleanUrl.startsWith('http://') || cleanUrl.startsWith('https://')) {
-      return CircleAvatar(
-        radius: radius,
-        backgroundColor: Colors.grey.shade200,
-        child: ClipOval(
-          child: Image.network(
-            cleanUrl,
-            width: radius * 2,
-            height: radius * 2,
-            fit: BoxFit.cover,
-            errorBuilder: (context, error, stackTrace) => fallbackWidget,
-            loadingBuilder: (context, child, loadingProgress) {
-              if (loadingProgress == null) return child;
-              return Center(
-                child: SizedBox(
-                  width: radius * 0.8,
-                  height: radius * 0.8,
-                  child: CircularProgressIndicator(
-                    strokeWidth: 2,
-                    value: loadingProgress.expectedTotalBytes != null
-                        ? loadingProgress.cumulativeBytesLoaded /
-                            loadingProgress.expectedTotalBytes!
-                        : null,
-                  ),
-                ),
-              );
-            },
+/// Tình trạng tồn kho — TÍNH TỪ trường `soluong`, không lưu thành trường mới
+/// (đề chỉ cho phép 4 trường name, price, soluong, image).
+class StockStatus {
+  static const int lowStock = 5;
+
+  final String label;
+  final Color color;
+  final IconData icon;
+
+  const StockStatus._(this.label, this.color, this.icon);
+
+  static const outOfStock = StockStatus._(
+    'Hết hàng',
+    Color(0xFFEF4444),
+    Icons.cancel_rounded,
+  );
+  static const low = StockStatus._(
+    'Sắp hết',
+    Color(0xFFF59E0B),
+    Icons.warning_amber_rounded,
+  );
+  static const inStock = StockStatus._(
+    'Còn hàng',
+    Color(0xFF10B981),
+    Icons.check_circle_rounded,
+  );
+
+  factory StockStatus.of(int soluong) =>
+      soluong <= 0 ? outOfStock : (soluong < lowStock ? low : inStock);
+
+  /// Nhãn tình trạng dạng viên thuốc (dùng ở bảng, thẻ, chi tiết)
+  Widget badge({double fontSize = 12}) => Container(
+    padding: EdgeInsets.symmetric(
+      horizontal: fontSize * 0.8,
+      vertical: fontSize * 0.35,
+    ),
+    decoration: BoxDecoration(
+      color: color.withValues(alpha: 0.12),
+      borderRadius: BorderRadius.circular(20),
+      border: Border.all(color: color.withValues(alpha: 0.35)),
+    ),
+    child: Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Icon(icon, size: fontSize + 2, color: color),
+        SizedBox(width: fontSize * 0.35),
+        Text(
+          label,
+          style: TextStyle(
+            color: color,
+            fontWeight: FontWeight.w700,
+            fontSize: fontSize,
           ),
         ),
-      );
-    }
-
-    return fallbackWidget;
-  }
+      ],
+    ),
+  );
 }

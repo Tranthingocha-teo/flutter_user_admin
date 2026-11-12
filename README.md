@@ -1,74 +1,88 @@
-# ỨNG DỤNG QUẢN LÝ NGƯỜI DÙNG PHÂN HỆ ADMIN ĐA NỀN TẢNG (FLUTTER)
+# ỨNG DỤNG QUẢN LÝ SẢN PHẨM - PHÂN HỆ ADMIN (FLUTTER)
 
 **Học phần:** Phát triển Ứng dụng Di động Đa nền tảng (7) &bull; **Trường ĐH CNTT & TT Việt - Hàn (VKU)**  
 **Sinh viên thực hiện:** Trần Thị Ngọc Hà  
 **Mã số sinh viên:** `23IT.B046` &bull; **Lớp sinh hoạt:** `23JIT`  
-**Đề thi:** Giữa kỳ - Xây dựng App Quản trị Người dùng Đa nền tảng (Web & Mobile)
+**Đề thi:** Giữa kỳ - Xây dựng app nhập, hiển thị, sửa, xóa sản phẩm ở phân hệ Admin (Web & Mobile)
 
 ---
 
-## 🌟 TỔNG QUAN TÍNH NĂNG ĐẠT ĐƯỢC (10.0 / 10.0 ĐIỂM)
+## 🌟 TỔNG QUAN TÍNH NĂNG
 
-| Chức năng | Chi tiết | Điểm đề thi |
+| Chức năng | Chi tiết | Điểm |
 | :--- | :--- | :---: |
-| **Nền tảng Web (8.0đ)** | Bảng Data Table hiển thị người dùng trên Web với 4 trường: `email`, `matkhau`, `hoten`, `hinhanh` kết nối Firebase / MongoDB | **8.0 / 8.0** |
-| **Phân hệ Admin & Nâng cao (1.5đ)** | Đăng nhập Admin, Thêm, Sửa, Xóa (có Confirm Dialog), Tìm kiếm thời gian thực, Lọc/Sắp xếp A-Z, Đổi theme Sáng/Tối, Xuất file `database.json` | **1.5 / 1.5** |
-| **Nền tảng Di động (0.5đ)** | Responsive Mobile Card View, nhập hình ảnh từ Thư viện máy (Gallery), Chụp ảnh (Camera), URL hoặc Preset Avatars | **0.5 / 0.5** |
+| **Thêm & hiển thị sản phẩm trên Web** | Bảng sản phẩm trên Web với 4 trường `name`, `price`, `soluong`, `image`, lưu trên **Cloud Firestore** (collection `products`), cập nhật theo thời gian thực | 8.0 |
+| **Đăng nhập, Sửa, Xóa & nâng cao** | Đăng ký / Đăng nhập bằng **Firebase Authentication**, có **xác thực email** (Firebase gửi mail xác thực về hộp thư, chưa xác thực thì không vào được), Quên mật khẩu (gửi mail đặt lại). Thêm / Sửa / Xóa (có xác nhận), xem chi tiết, tìm kiếm không dấu, sắp xếp theo tên / giá / số lượng, lọc sắp hết hàng, thống kê tồn kho, **Dashboard phân tích** (biểu đồ tỷ trọng giá trị, tương quan giá – số lượng có hệ số r và đường xu hướng, tỷ trọng số lượng, tình trạng kho, phân loại ABC), Sáng/Tối, xuất `database.json` | 1.5 |
+| **Nhập hình ảnh trên di động** | Giao diện thẻ cho điện thoại; chọn ảnh từ Thư viện hoặc Chụp ảnh, ảnh tải lên Cloudinary, link lưu vào trường `image` | 0.5 |
 
-> **QUY TẮC CỐT LÕI CỦA ĐỀ THI:** Cơ sở dữ liệu và file nộp chỉ chấp nhận đúng 4 trường: `email`, `matkhau`, `hoten`, `hinhanh` (không tự ý thêm trường id hay bất kỳ trường nào khác).
+> **Quy định của đề:** CSDL chỉ có 4 trường `name`, `price`, `soluong`, `image`.
+> ID document do Firestore tự sinh, không phải trường dữ liệu. Tài khoản đăng nhập nằm trong Firebase Authentication, không lưu trong Firestore.
+> `firestore.rules` chặn mọi document có trường khác 4 trường trên và chỉ cho tài khoản **đã xác thực email** đọc/ghi.
 
 ---
 
-## 📁 CẤU TRÚC HỒ SƠ BÀI THI & FILE NỘP
+## 🔐 LUỒNG ĐĂNG KÝ / XÁC THỰC EMAIL
+
+1. Màn hình đăng nhập → **Chưa có tài khoản? Đăng ký ngay** → nhập email + mật khẩu.
+2. App tạo tài khoản và Firebase **gửi email xác thực** về hộp thư (xem cả mục Spam). App hiện thông báo "Đã gửi email xác thực tới ...".
+3. Bấm link trong email → quay lại app đăng nhập.
+4. Nếu đăng nhập khi chưa xác thực: app báo lỗi và có nút **Gửi lại email xác thực**.
+
+---
+
+## 📁 CẤU TRÚC DỰ ÁN
 
 ```
 flutter_user_admin/
-├── database.json              # File cơ sở dữ liệu nộp bài (chuẩn 4 trường)
-├── users.json                 # File dữ liệu định dạng mảng JSON
-├── KICH_BAN_QUAY_VIDEO_DEMO.md # Kịch bản quay video demo 3 phút
-├── docs/
-│   ├── BAO_CAO_GIUA_KY_TRAN_THI_NGOC_HA.docx # File báo cáo Word
-│   ├── BAO_CAO_GIUA_KY_TRAN_THI_NGOC_HA.pdf  # File báo cáo PDF
-│   └── screenshots/                          # Toàn bộ ảnh chụp minh họa thực tế
+├── database.json                  # File CSDL nộp bài (mảng sản phẩm, 4 trường)
+├── firestore.rules                # Luật bảo mật Firestore
+├── firebase.json, .firebaserc     # Cấu hình Firebase CLI (project vku-product-admin-23itb)
 ├── lib/
-│   ├── main.dart              # Entrypoint ứng dụng Flutter
-│   ├── models/user_model.dart # Model dữ liệu nghiêm ngặt 4 trường
-│   ├── screens/               # Login, UserList, Form, Detail Dialog
-│   ├── services/api_service.dart # Dual Service: Firebase RTDB & Local/Mongo Sync
-│   └── utils/app_theme.dart   # Giao diện Dark/Light hiện đại
-└── server/                    # Node.js Express + MongoDB REST API Server dự phòng
+│   ├── main.dart
+│   ├── firebase_options.dart      # Cấu hình Firebase cho Web + Android
+│   ├── models/product_model.dart  # Model 4 trường
+│   ├── screens/dashboard_screen.dart # Dashboard biểu đồ & tỷ suất
+│   ├── screens/                   # login (đăng nhập/đăng ký/quên MK), product_list, product_form, product_detail
+│   ├── services/api_service.dart  # CRUD Cloud Firestore
+│   ├── services/auth_service.dart # Firebase Auth + xác thực email
+│   └── services/image_upload_service.dart # Upload ảnh lên Cloudinary
+└── android/app/google-services.json
+```
+
+### Thư viện sử dụng
+```bash
+flutter pub add firebase_core firebase_auth cloud_firestore image_picker http google_fonts fl_chart
+npm install -g firebase-tools        # Firebase CLI
+firebase deploy --only firestore:rules
 ```
 
 ---
 
-## 🚀 HƯỚNG DẪN KHỞI CHẠY ỨNG DỤNG
+## 🚀 HƯỚNG DẪN KHỞI CHẠY
 
-### 1. Chạy trên nền tảng Web (Khuyên dùng)
+### 1. Web
 ```bash
-cd /home/tranthingocha/Projects/flutter_user_admin
 flutter run -d chrome
 ```
-*Tài khoản Admin đăng nhập mẫu:*
-- **Email:** `admin@gmail.com`
-- **Mật khẩu:** `Admin@123`  
-*(Hoặc bấm nút "Điền nhanh tài khoản Admin" trên màn hình đăng nhập).*
+Đăng ký tài khoản → xác thực email → đăng nhập. Lần đầu bấm **↻ Khôi phục dữ liệu mẫu** để nạp 6 sản phẩm mẫu.
 
-### 2. Chạy trên Android Emulator (Mobile)
+### 2. Android Emulator
 ```bash
 flutter emulators --launch Pixel_14
 flutter run -d emulator-5554
 ```
 
-### 3. Chạy Server MongoDB (Tùy chọn nếu muốn kiểm thử MongoDB)
+### 3. Đồng bộ dữ liệu thật vào `database.json`
+App chạy trên Chrome/Android nên không ghi thẳng được vào file trong thư mục dự án.
+Chạy script sau song song với app; mỗi lần Thêm / Sửa / Xóa thì `database.json` tự cập nhật (chỉ 4 trường, không kèm ID):
 ```bash
-cd /home/tranthingocha/Projects/flutter_user_admin/server
-npm start
+# lần đầu: đăng nhập bằng tài khoản đã xác thực email
+FB_EMAIL=ban@gmail.com FB_PASSWORD=matkhau node tools/sync_database.mjs --watch
+# các lần sau (đã lưu phiên ở tools/.sync_token)
+node tools/sync_database.mjs --watch
 ```
 
----
-
-## 🧪 CHẠY KIỂM THỬ TỰ ĐỘNG (UNIT TESTS)
+### 4. Kiểm thử
 ```bash
 flutter test
 ```
-*Kết quả:* Tất cả các bài kiểm tra đều vượt qua 100% (Pass 3/3 tests).
